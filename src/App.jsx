@@ -20,13 +20,13 @@ function App() {
     <div className="App">
       {/* Usamos una expresión condicional para mostrar el texto o la imagen */}
       {showText ? (
-        <h1>Empezo para ti?</h1>
+        <h1>Haces Mewing</h1>
       ) : (
         <img src={catMewing} alt="Cat Mewing" />
       )}
 
       {/* Usamos una expresión condicional para mostrar el botón solo si no se está reproduciendo */}
-      {!isPlaying && <button onClick={toggleAudio}>Ya empezo para ti?</button>}
+      {!isPlaying && <button onClick={toggleAudio}>Si</button>}
     </div>
   );
 }
