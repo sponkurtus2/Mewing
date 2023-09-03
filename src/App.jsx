@@ -1,32 +1,47 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
+import strongImage from "./strong.jpeg";
+import weakImage from "./weak.jpeg";
 import song from "./song.mp3";
-import catMewing from "./mewing.png";
 
 function App() {
-  const audio = new Audio(song);
-  audio.loop = true;
+  const [showImage, setShowImage] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [showText, setShowText] = useState(true); // Agregamos un estado para controlar la visibilidad del texto
+  const handleYesClick = () => {
+    setShowImage(true);
+    setMessage("Comenzo para ti");
+    playAudio();
+  };
 
-  const toggleAudio = () => {
+  const handleNoClick = () => {
+    setShowImage(true);
+    setMessage("Todo termino para ti");
+    playAudio();
+  };
+
+  const playAudio = () => {
+    const audio = new Audio(song);
     audio.loop = true;
     audio.play();
-    setIsPlaying(true);
-    setShowText(false); // Ocultamos el texto cuando se inicia la reproducción
   };
 
   return (
     <div className="App">
-      {/* Usamos una expresión condicional para mostrar el texto o la imagen */}
-      {showText ? (
-        <h1>Haces Mewing</h1>
+      {showImage ? (
+        <div>
+          <img
+            src={message === "Comenzo para ti" ? strongImage : weakImage}
+            alt="Result"
+          />
+          <p>{message}</p>
+        </div>
       ) : (
-        <img src={catMewing} alt="Cat Mewing" />
+        <div>
+          <h1>¿Empezó para ti?</h1>
+          <button onClick={handleYesClick}>Sí</button>
+          <button onClick={handleNoClick}>No</button>
+        </div>
       )}
-
-      {/* Usamos una expresión condicional para mostrar el botón solo si no se está reproduciendo */}
-      {!isPlaying && <button onClick={toggleAudio}>Si</button>}
     </div>
   );
 }
